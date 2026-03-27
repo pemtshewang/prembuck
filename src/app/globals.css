@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0b0b0c;
+  --color-foreground: #e5e2e3;
+
+  --color-surface: #161618;
+  --color-surface-container: #1c1b1c;
+  --color-surface-container-high: #2a2a2b;
+  --color-surface-container-highest: #353436;
+
+  --color-primary: #10b981;
+  --color-primary-container: #005236;
+  --color-on-primary: #003824;
+
+  --color-secondary: #f59e0b;
+  --color-secondary-container: #653e00;
+
+  --color-danger: #ef4444;
+  --color-error: #ef4444;
+
+  --color-on-surface-variant: #bbcabf;
+
+  --radius-xl: 0.5rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+
+  --animate-pulse-subtle: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes pulse-subtle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .7; }
+  }
+}
+
+:root {
+  --background: #0b0b0c;
+  --foreground: #e5e2e3;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+
+  .glass-card {
+    @apply bg-surface/60 backdrop-blur-xl border border-white/[0.05];
+  }
+
+  .transition-standard {
+    @apply transition-all duration-200 ease-in-out;
+  }
+
+  .privacy-blur {
+    @apply transition-all duration-300;
+  }
+
+  .privacy-blur.active {
+    @apply blur-md;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
