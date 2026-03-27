@@ -14,6 +14,7 @@ import { useAuraStore } from '@/lib/store';
 
 export function DebtSnowballCalculator() {
   const currency = useAuraStore((state) => state.currency);
+  const rates = useAuraStore((state) => state.rates);
   const [principal, setPrincipal] = useState(42500);
   const [interest, setInterest] = useState(4.5);
   const [minPayment, setMinPayment] = useState(850);
@@ -44,7 +45,7 @@ export function DebtSnowballCalculator() {
           </div>
           <div className="bg-surface-container p-4 rounded-2xl border-l-4 border-secondary flex-1 md:min-w-[160px]">
              <p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Total Liability</p>
-             <p className="text-2xl font-semibold text-secondary">{formatCurrency(principal + totalInterest, currency)}</p>
+             <p className="text-2xl font-semibold text-secondary">{formatCurrency(principal + totalInterest, currency, rates)}</p>
           </div>
         </div>
       </div>
@@ -81,7 +82,7 @@ export function DebtSnowballCalculator() {
           <div className="space-y-6">
             <div className="flex justify-between items-center px-1">
                <span className="text-sm font-semibold">Additional Snowball Kick</span>
-               <span className="text-sm font-bold text-primary">+{formatCurrency(snowball, currency)}/mo</span>
+               <span className="text-sm font-bold text-primary">+{formatCurrency(snowball, currency, rates)}/mo</span>
             </div>
             <input
               type="range"
@@ -95,8 +96,8 @@ export function DebtSnowballCalculator() {
             <div className="p-4 bg-primary/5 border border-primary/20 rounded-xl flex items-start gap-3">
                <ShieldCheck className="h-5 w-5 text-primary mt-0.5" />
                <p className="text-xs leading-relaxed font-light">
-                 By adding <span className="text-primary font-bold">{formatCurrency(snowball, currency)}</span> to your monthly plan, you save
-                 <span className="text-foreground font-bold font-mono"> {formatCurrency(totalInterest * 0.4, currency)} </span>
+                 By adding <span className="text-primary font-bold">{formatCurrency(snowball, currency, rates)}</span> to your monthly plan, you save
+                 <span className="text-foreground font-bold font-mono"> {formatCurrency(totalInterest * 0.4, currency, rates)} </span>
                  in interest and reach zero debt 14 months earlier.
                </p>
             </div>

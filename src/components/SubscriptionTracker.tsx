@@ -21,6 +21,7 @@ const subscriptions = [
 
 export function SubscriptionTracker() {
   const currency = useAuraStore((state) => state.currency);
+  const rates = useAuraStore((state) => state.rates);
   const totalBurn = subscriptions.reduce((acc, s) => acc + s.cost, 0);
 
   return (
@@ -32,7 +33,7 @@ export function SubscriptionTracker() {
         </div>
         <div className="text-right">
           <p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Monthly Burn</p>
-          <p className="text-3xl font-light text-secondary">{formatCurrency(totalBurn, currency)}</p>
+          <p className="text-3xl font-light text-secondary">{formatCurrency(totalBurn, currency, rates)}</p>
         </div>
       </div>
 
@@ -58,7 +59,7 @@ export function SubscriptionTracker() {
             </div>
 
             <div className="flex items-end justify-between relative z-10">
-               <p className="text-xl font-bold font-mono tracking-tighter">{formatCurrency(sub.cost, currency)}</p>
+               <p className="text-xl font-bold font-mono tracking-tighter">{formatCurrency(sub.cost, currency, rates)}</p>
                <span className={cn(
                  "px-2.5 py-1 rounded-full text-[8px] font-bold uppercase tracking-[0.1em] border",
                  sub.status === 'Urgent Alert' ? "bg-danger/10 text-danger border-danger/20 animate-pulse" : "bg-white/5 text-on-surface-variant border-white/10"

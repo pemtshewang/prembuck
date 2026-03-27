@@ -5,13 +5,14 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatCurrency(amount: number, currency: string = 'USD') {
+export function formatCurrency(amount: number, currency: string = 'USD', rates: Record<string, number> = { USD: 1 }) {
+  const convertedAmount = amount * (rates[currency] || 1);
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: currency,
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  }).format(amount);
+  }).format(convertedAmount);
 }
 
 export function calculateDebtPayoff(

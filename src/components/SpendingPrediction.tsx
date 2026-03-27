@@ -7,6 +7,7 @@ import { getSpendingPrediction, formatCurrency, cn } from '@/lib/utils';
 export function SpendingPrediction() {
   const transactions = useAuraStore((state) => state.transactions);
   const currency = useAuraStore((state) => state.currency);
+  const rates = useAuraStore((state) => state.rates);
   const { predictedTotal, savingsVelocity, optimizationAlert } = getSpendingPrediction(transactions);
 
   return (
@@ -23,11 +24,11 @@ export function SpendingPrediction() {
           <div className="space-y-4">
             <h3 className="text-3xl md:text-4xl font-light leading-tight tracking-tighter">
               Predicted burn rate for this month is
-              <span className="text-primary font-semibold"> {formatCurrency(predictedTotal, currency)}</span>
+              <span className="text-primary font-semibold"> {formatCurrency(predictedTotal, currency, rates)}</span>
             </h3>
             <p className="text-on-surface-variant text-base leading-relaxed max-w-lg font-light">
               Based on your reduced lifestyle overhead, we suggest moving
-              <span className="text-foreground font-medium"> {formatCurrency(savingsVelocity * 2, currency)} </span>
+              <span className="text-foreground font-medium"> {formatCurrency(savingsVelocity * 2, currency, rates)} </span>
               to your High-Yield Vault to capture the 4.8% APY boost.
             </p>
           </div>

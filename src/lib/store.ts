@@ -30,6 +30,7 @@ interface AuraState {
   categoryLimits: CategoryLimit[];
   privacyMode: boolean;
   currency: 'USD' | 'EUR' | 'BTN' | 'INR';
+  rates: Record<string, number>;
   togglePrivacyMode: () => void;
   setCurrency: (currency: AuraState['currency']) => void;
   addTransaction: (transaction: Omit<Transaction, 'id'>) => void;
@@ -56,6 +57,7 @@ export const useAuraStore = create<AuraState>()(
       ],
       privacyMode: false,
       currency: 'USD',
+      rates: { USD: 1, EUR: 0.92, BTN: 83.15, INR: 83.15 },
       togglePrivacyMode: () => set((state) => ({ privacyMode: !state.privacyMode })),
       setCurrency: (currency) => set({ currency }),
       addTransaction: (transaction) => set((state) => ({

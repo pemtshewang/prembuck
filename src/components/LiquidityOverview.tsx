@@ -15,6 +15,7 @@ export function LiquidityOverview() {
   const accounts = useAuraStore((state) => state.accounts);
   const privacyMode = useAuraStore((state) => state.privacyMode);
   const currency = useAuraStore((state) => state.currency);
+  const rates = useAuraStore((state) => state.rates);
 
   const totalNetWorth = accounts.reduce((acc, account) => acc + account.balance, 0);
 
@@ -29,7 +30,7 @@ export function LiquidityOverview() {
             "text-5xl md:text-7xl font-light tracking-tighter text-foreground privacy-blur",
             privacyMode && "active"
           )}>
-            {formatCurrency(totalNetWorth, currency)}
+            {formatCurrency(totalNetWorth, currency, rates)}
           </h2>
           <div className="flex items-center gap-1.5 text-primary text-sm font-semibold">
             <TrendingUp className="h-4 w-4" />
@@ -57,7 +58,7 @@ export function LiquidityOverview() {
                     "text-2xl font-semibold privacy-blur",
                     privacyMode && "active"
                   )}>
-                    {formatCurrency(account.balance, currency)}
+                    {formatCurrency(account.balance, currency, rates)}
                   </p>
                 </div>
               </div>
