@@ -5,19 +5,20 @@ import { formatCurrency, cn } from '@/lib/utils';
 import {
   TrendingUp,
   Wallet,
-  PiggyBank,
-  BarChart3,
   ChevronRight,
-  Monitor
 } from 'lucide-react';
 
 export function LiquidityOverview() {
-  const accounts = useAuraStore((state) => state.accounts);
+  const liquidity = useAuraStore((state) => state.liquidity);
   const privacyMode = useAuraStore((state) => state.privacyMode);
   const currency = useAuraStore((state) => state.currency);
   const rates = useAuraStore((state) => state.rates);
 
-  const totalNetWorth = accounts.reduce((acc, account) => acc + account.balance, 0);
+  const accounts = [
+    { name: 'Cash', balance: liquidity.cash, type: 'cash' },
+    { name: 'Savings', balance: liquidity.savings, type: 'savings' },
+    { name: 'Investments', balance: liquidity.investments, type: 'investment' },
+  ];
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -30,7 +31,7 @@ export function LiquidityOverview() {
             "text-5xl md:text-7xl font-light tracking-tighter text-foreground privacy-blur",
             privacyMode && "active"
           )}>
-            {formatCurrency(totalNetWorth, currency, rates)}
+            {formatCurrency(liquidity.totalNetWorth, currency, rates)}
           </h2>
           <div className="flex items-center gap-1.5 text-primary text-sm font-semibold">
             <TrendingUp className="h-4 w-4" />
@@ -42,7 +43,7 @@ export function LiquidityOverview() {
       <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {accounts.map((account) => (
           <div
-            key={account.id}
+            key={account.name}
             className="group bg-surface-container border border-white/5 p-6 rounded-2xl hover:border-primary/20 transition-standard relative overflow-hidden"
           >
             <div className="flex items-center justify-between relative z-10">
