@@ -14,9 +14,9 @@ import { cn } from '@/lib/utils';
 
 const navItems = [
   { icon: LayoutDashboard, label: 'Home', href: '/' },
-  { icon: Wallet, label: 'Wealth', href: '/wealth' },
+  { icon: Wallet, label: 'Wealth', href: '/portfolio' },
   { icon: Search, label: 'Search', href: '/search' },
-  { icon: BarChart3, label: 'Insights', href: '/insights' },
+  { icon: BarChart3, label: 'Insights', href: '/analysis' },
 ];
 
 export function BottomNav() {
